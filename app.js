@@ -73,14 +73,15 @@ class Fruit {
     }
 }
 
-// 建立果實物件
-let fruits1 = new Fruit();
+let fruits1 = new Fruit();  // 建立果實物件
 let CurrentScore = 0;
 let HighScore = 0;
 
 //監聽上下左右方向鍵事件
 let direction = "ArrowRight";
-window.addEventListener('keydown', (e) => {
+window.addEventListener('keydown', (e) => pressKey(e));
+
+function pressKey(e) {
     if ((e.key == "ArrowRight") && (direction != "ArrowLeft")) {
         // console.log("你正在案右鍵");
         direction = "ArrowRight";
@@ -97,7 +98,8 @@ window.addEventListener('keydown', (e) => {
         // console.log("你正在案上鍵");
         direction = "ArrowUp";
     }
-});
+    window.removeEventListener('keydown', (e) => pressKey(e));
+}
 
 
 
@@ -190,6 +192,8 @@ function draw() {
         snake.pop();
     }
     snake.unshift(newHead);
+
+    window.addEventListener('keydown', (e) => pressKey(e));
 }
 
 // 歷史高分紀錄更新
